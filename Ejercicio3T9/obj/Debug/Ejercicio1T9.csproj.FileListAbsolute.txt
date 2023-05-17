@@ -1,0 +1,11 @@
+C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio1T9\bin\Debug\Ejercicio1T9.exe.config
+C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio1T9\bin\Debug\Ejercicio1T9.exe
+C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio1T9\bin\Debug\Ejercicio1T9.pdb
+C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio1T9\obj\Debug\Ejercicio1T9.csproj.AssemblyReference.cache
+C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio1T9\obj\Debug\Ejercicio1T9.csproj.SuggestedBindingRedirects.cache
+C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio1T9\obj\Debug\Ejercicio1T9.Profesores.resources
+C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio1T9\obj\Debug\Ejercicio1T9.Properties.Resources.resources
+C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio1T9\obj\Debug\Ejercicio1T9.csproj.GenerateResource.cache
+C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio1T9\obj\Debug\Ejercicio1T9.csproj.CoreCompileInputs.cache
+C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio1T9\obj\Debug\Ejercicio1T9.exe
+C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio1T9\obj\Debug\Ejercicio1T9.pdb
