@@ -161,22 +161,22 @@ namespace Ejercicio3T9
         }
         private void guardarButton_Click(object sender, EventArgs e)
         {
-            if(tituloTextBox.Text != "" && autorTextBox.Text != "" && formatoComboBox.Text != "" && idiomaComboBox.Text != "" && leidoComboBox.Text != "")
-            {
-                if(!sqlDBHelper.estaTituloDuplicado(tituloTextBox.Text))
-                {
-                    // Creamos el profesor con los datos del formulario
-                    Libro libro = new Libro(tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text, idiomaComboBox.Text, leidoComboBox.Text);
-                    sqlDBHelper.anadirLibro(libro);
-                    // Actualizamos la posición
-                    pos = sqlDBHelper.NumLibros - 1;
+            //if(tituloTextBox.Text != "" && autorTextBox.Text != "" && formatoComboBox.Text != "" && idiomaComboBox.Text != "" && leidoComboBox.Text != "")
+            //{
+            //    if(!sqlDBHelper.estaTituloDuplicado(tituloTextBox.Text))
+            //    {
+            //        // Creamos el profesor con los datos del formulario
+            //        Libro libro = new Libro(tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text, idiomaComboBox.Text, leidoComboBox.Text);
+            //        sqlDBHelper.anadirLibro(libro);
+            //        // Actualizamos la posición
+            //        pos = sqlDBHelper.NumLibros - 1;
 
-                    // Volvemos a cambiarlo a añadir
-                    anadirButton.Text = "Añadir";
+            //        // Volvemos a cambiarlo a añadir
+            //        anadirButton.Text = "Añadir";
 
-                    mostrarRegistro(pos);
-                }
-            }
+            //        mostrarRegistro(pos);
+            //    }
+            //}
 
         }
         
@@ -206,7 +206,9 @@ namespace Ejercicio3T9
 
         private void listaProfesoresButton_Click(object sender, EventArgs e)
         {
-            sqlDBHelper.listaLibros();
+
+            formularioLista formularioLista = new formularioLista();
+            formularioLista.ShowDialog();
         }
 
         private void buscarApellidoButton_Click(object sender, EventArgs e)
@@ -217,6 +219,20 @@ namespace Ejercicio3T9
         }
 
         private void registroLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listaIdiomabutton_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void listaFormatobutton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listaLeidobutton_Click(object sender, EventArgs e)
         {
 
         }

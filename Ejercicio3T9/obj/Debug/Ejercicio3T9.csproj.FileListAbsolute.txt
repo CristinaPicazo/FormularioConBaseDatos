@@ -22,3 +22,4 @@ C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio3T9\Ejercici
 C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio3T9\Ejercicio3T9\obj\Debug\Ejercicio3T9.csproj.CoreCompileInputs.cache
 C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio3T9\Ejercicio3T9\obj\Debug\Ejercicio1T9.exe
 C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio3T9\Ejercicio3T9\obj\Debug\Ejercicio1T9.pdb
+C:\Users\derez\Desktop\DAW\Programación\Tema 9\Ejercicios\Ejercicio3T9\Ejercicio3T9\obj\Debug\Ejercicio1T9.formularioLista.resources

@@ -151,21 +151,22 @@ namespace Ejercicio1T9
             return false;
         }
 
-        public void listaLibros()
+        public string listaLibros()
         {
+            string listaLibros = "Libros:";
             if(numLibros > 0)
             {
-                string listaLibros = "Libros:";
 
                 for(int i = 0; i < numLibros; i++)
                 {
-                    listaLibros += "\n\t" + dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString();
+                    listaLibros += "\n"+i+1+": " + dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString() + " de " 
+                        + dsLibros.Tables["Libros"].Rows[i]["Autor"].ToString();
                 }
-                MessageBox.Show(listaLibros);
+                return listaLibros;
             }
             else
             {
-                MessageBox.Show("La lista esta vacía");
+                return listaLibros="No tiene libros.";
             }
         }
 

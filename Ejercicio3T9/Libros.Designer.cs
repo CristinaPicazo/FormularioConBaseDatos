@@ -45,18 +45,19 @@
             this.eliminarButton = new System.Windows.Forms.Button();
             this.registroLabel = new System.Windows.Forms.Label();
             this.actualizarButton = new System.Windows.Forms.Button();
-            this.listaProfesoresButton = new System.Windows.Forms.Button();
-            this.buscarApellidoButton = new System.Windows.Forms.Button();
+            this.listaGeneralButton = new System.Windows.Forms.Button();
+            this.buscarTituloButton = new System.Windows.Forms.Button();
             this.leidoComboBox = new System.Windows.Forms.ComboBox();
             this.formatoComboBox = new System.Windows.Forms.ComboBox();
             this.idiomaComboBox = new System.Windows.Forms.ComboBox();
+            this.BuscarAutorbutton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(87, 109);
+            this.label1.Location = new System.Drawing.Point(76, 66);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 24);
             this.label1.TabIndex = 0;
@@ -66,7 +67,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(88, 173);
+            this.label2.Location = new System.Drawing.Point(77, 130);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(60, 24);
             this.label2.TabIndex = 1;
@@ -76,7 +77,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(63, 229);
+            this.label3.Location = new System.Drawing.Point(52, 186);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(85, 24);
             this.label3.TabIndex = 2;
@@ -86,7 +87,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(68, 285);
+            this.label4.Location = new System.Drawing.Point(57, 242);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 24);
             this.label4.TabIndex = 3;
@@ -96,7 +97,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(455, 257);
+            this.label5.Location = new System.Drawing.Point(444, 214);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(62, 24);
             this.label5.TabIndex = 4;
@@ -105,7 +106,7 @@
             // autorTextBox
             // 
             this.autorTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.autorTextBox.Location = new System.Drawing.Point(163, 166);
+            this.autorTextBox.Location = new System.Drawing.Point(152, 123);
             this.autorTextBox.Name = "autorTextBox";
             this.autorTextBox.Size = new System.Drawing.Size(274, 29);
             this.autorTextBox.TabIndex = 5;
@@ -113,7 +114,7 @@
             // tituloTextBox
             // 
             this.tituloTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tituloTextBox.Location = new System.Drawing.Point(163, 104);
+            this.tituloTextBox.Location = new System.Drawing.Point(152, 61);
             this.tituloTextBox.Name = "tituloTextBox";
             this.tituloTextBox.Size = new System.Drawing.Size(581, 29);
             this.tituloTextBox.TabIndex = 6;
@@ -123,7 +124,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Blue;
-            this.label6.Location = new System.Drawing.Point(77, 352);
+            this.label6.Location = new System.Drawing.Point(12, 291);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(81, 24);
             this.label6.TabIndex = 10;
@@ -132,7 +133,7 @@
             // primeroButton
             // 
             this.primeroButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.primeroButton.Location = new System.Drawing.Point(97, 391);
+            this.primeroButton.Location = new System.Drawing.Point(39, 318);
             this.primeroButton.Name = "primeroButton";
             this.primeroButton.Size = new System.Drawing.Size(155, 49);
             this.primeroButton.TabIndex = 11;
@@ -143,7 +144,7 @@
             // anteriorButton
             // 
             this.anteriorButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.anteriorButton.Location = new System.Drawing.Point(273, 391);
+            this.anteriorButton.Location = new System.Drawing.Point(215, 318);
             this.anteriorButton.Name = "anteriorButton";
             this.anteriorButton.Size = new System.Drawing.Size(155, 49);
             this.anteriorButton.TabIndex = 12;
@@ -154,7 +155,7 @@
             // siguienteButton
             // 
             this.siguienteButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.siguienteButton.Location = new System.Drawing.Point(446, 391);
+            this.siguienteButton.Location = new System.Drawing.Point(388, 318);
             this.siguienteButton.Name = "siguienteButton";
             this.siguienteButton.Size = new System.Drawing.Size(155, 49);
             this.siguienteButton.TabIndex = 13;
@@ -165,7 +166,7 @@
             // ultimoButton
             // 
             this.ultimoButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ultimoButton.Location = new System.Drawing.Point(623, 391);
+            this.ultimoButton.Location = new System.Drawing.Point(565, 318);
             this.ultimoButton.Name = "ultimoButton";
             this.ultimoButton.Size = new System.Drawing.Size(155, 49);
             this.ultimoButton.TabIndex = 14;
@@ -176,7 +177,7 @@
             // anadirButton
             // 
             this.anadirButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.anadirButton.Location = new System.Drawing.Point(65, 472);
+            this.anadirButton.Location = new System.Drawing.Point(307, 387);
             this.anadirButton.Name = "anadirButton";
             this.anadirButton.Size = new System.Drawing.Size(158, 40);
             this.anadirButton.TabIndex = 15;
@@ -187,7 +188,7 @@
             // guardarButton
             // 
             this.guardarButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.guardarButton.Location = new System.Drawing.Point(270, 472);
+            this.guardarButton.Location = new System.Drawing.Point(550, 12);
             this.guardarButton.Name = "guardarButton";
             this.guardarButton.Size = new System.Drawing.Size(158, 40);
             this.guardarButton.TabIndex = 16;
@@ -198,7 +199,7 @@
             // eliminarButton
             // 
             this.eliminarButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.eliminarButton.Location = new System.Drawing.Point(679, 472);
+            this.eliminarButton.Location = new System.Drawing.Point(516, 387);
             this.eliminarButton.Name = "eliminarButton";
             this.eliminarButton.Size = new System.Drawing.Size(158, 40);
             this.eliminarButton.TabIndex = 17;
@@ -220,7 +221,7 @@
             // actualizarButton
             // 
             this.actualizarButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.actualizarButton.Location = new System.Drawing.Point(480, 472);
+            this.actualizarButton.Location = new System.Drawing.Point(101, 387);
             this.actualizarButton.Name = "actualizarButton";
             this.actualizarButton.Size = new System.Drawing.Size(158, 40);
             this.actualizarButton.TabIndex = 20;
@@ -228,27 +229,27 @@
             this.actualizarButton.UseVisualStyleBackColor = true;
             this.actualizarButton.Click += new System.EventHandler(this.actualizarButton_Click);
             // 
-            // listaProfesoresButton
+            // listaGeneralButton
             // 
-            this.listaProfesoresButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listaProfesoresButton.Location = new System.Drawing.Point(165, 548);
-            this.listaProfesoresButton.Name = "listaProfesoresButton";
-            this.listaProfesoresButton.Size = new System.Drawing.Size(200, 46);
-            this.listaProfesoresButton.TabIndex = 21;
-            this.listaProfesoresButton.Text = "Lista Profesores";
-            this.listaProfesoresButton.UseVisualStyleBackColor = true;
-            this.listaProfesoresButton.Click += new System.EventHandler(this.listaProfesoresButton_Click);
+            this.listaGeneralButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listaGeneralButton.Location = new System.Drawing.Point(215, 521);
+            this.listaGeneralButton.Name = "listaGeneralButton";
+            this.listaGeneralButton.Size = new System.Drawing.Size(337, 46);
+            this.listaGeneralButton.TabIndex = 21;
+            this.listaGeneralButton.Text = "Ver todos los libros";
+            this.listaGeneralButton.UseVisualStyleBackColor = true;
+            this.listaGeneralButton.Click += new System.EventHandler(this.listaProfesoresButton_Click);
             // 
-            // buscarApellidoButton
+            // buscarTituloButton
             // 
-            this.buscarApellidoButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buscarApellidoButton.Location = new System.Drawing.Point(542, 546);
-            this.buscarApellidoButton.Name = "buscarApellidoButton";
-            this.buscarApellidoButton.Size = new System.Drawing.Size(211, 48);
-            this.buscarApellidoButton.TabIndex = 22;
-            this.buscarApellidoButton.Text = "Buscar por apellido";
-            this.buscarApellidoButton.UseVisualStyleBackColor = true;
-            this.buscarApellidoButton.Click += new System.EventHandler(this.buscarApellidoButton_Click);
+            this.buscarTituloButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buscarTituloButton.Location = new System.Drawing.Point(165, 445);
+            this.buscarTituloButton.Name = "buscarTituloButton";
+            this.buscarTituloButton.Size = new System.Drawing.Size(211, 48);
+            this.buscarTituloButton.TabIndex = 22;
+            this.buscarTituloButton.Text = "Buscar por titulo";
+            this.buscarTituloButton.UseVisualStyleBackColor = true;
+            this.buscarTituloButton.Click += new System.EventHandler(this.buscarApellidoButton_Click);
             // 
             // leidoComboBox
             // 
@@ -257,7 +258,7 @@
             this.leidoComboBox.Items.AddRange(new object[] {
             "Sí",
             "No"});
-            this.leidoComboBox.Location = new System.Drawing.Point(542, 249);
+            this.leidoComboBox.Location = new System.Drawing.Point(531, 206);
             this.leidoComboBox.Name = "leidoComboBox";
             this.leidoComboBox.Size = new System.Drawing.Size(121, 32);
             this.leidoComboBox.TabIndex = 23;
@@ -269,7 +270,7 @@
             this.formatoComboBox.Items.AddRange(new object[] {
             "Físico",
             "Digital"});
-            this.formatoComboBox.Location = new System.Drawing.Point(165, 229);
+            this.formatoComboBox.Location = new System.Drawing.Point(154, 186);
             this.formatoComboBox.Name = "formatoComboBox";
             this.formatoComboBox.Size = new System.Drawing.Size(177, 32);
             this.formatoComboBox.TabIndex = 24;
@@ -281,21 +282,32 @@
             this.idiomaComboBox.Items.AddRange(new object[] {
             "Castellano",
             "Inglés"});
-            this.idiomaComboBox.Location = new System.Drawing.Point(165, 282);
+            this.idiomaComboBox.Location = new System.Drawing.Point(154, 239);
             this.idiomaComboBox.Name = "idiomaComboBox";
             this.idiomaComboBox.Size = new System.Drawing.Size(177, 32);
             this.idiomaComboBox.TabIndex = 25;
+            // 
+            // BuscarAutorbutton
+            // 
+            this.BuscarAutorbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BuscarAutorbutton.Location = new System.Drawing.Point(439, 448);
+            this.BuscarAutorbutton.Name = "BuscarAutorbutton";
+            this.BuscarAutorbutton.Size = new System.Drawing.Size(195, 45);
+            this.BuscarAutorbutton.TabIndex = 26;
+            this.BuscarAutorbutton.Text = "Buscar por autor";
+            this.BuscarAutorbutton.UseVisualStyleBackColor = true;
             // 
             // Libros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(917, 638);
+            this.ClientSize = new System.Drawing.Size(778, 638);
+            this.Controls.Add(this.BuscarAutorbutton);
             this.Controls.Add(this.idiomaComboBox);
             this.Controls.Add(this.formatoComboBox);
             this.Controls.Add(this.leidoComboBox);
-            this.Controls.Add(this.buscarApellidoButton);
-            this.Controls.Add(this.listaProfesoresButton);
+            this.Controls.Add(this.buscarTituloButton);
+            this.Controls.Add(this.listaGeneralButton);
             this.Controls.Add(this.actualizarButton);
             this.Controls.Add(this.registroLabel);
             this.Controls.Add(this.eliminarButton);
@@ -340,11 +352,12 @@
         private System.Windows.Forms.Button eliminarButton;
         private System.Windows.Forms.Label registroLabel;
         private System.Windows.Forms.Button actualizarButton;
-        private System.Windows.Forms.Button listaProfesoresButton;
-        private System.Windows.Forms.Button buscarApellidoButton;
+        private System.Windows.Forms.Button listaGeneralButton;
+        private System.Windows.Forms.Button buscarTituloButton;
         private System.Windows.Forms.ComboBox leidoComboBox;
         private System.Windows.Forms.ComboBox formatoComboBox;
         private System.Windows.Forms.ComboBox idiomaComboBox;
+        private System.Windows.Forms.Button BuscarAutorbutton;
     }
 }
 
