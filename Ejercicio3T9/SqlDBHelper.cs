@@ -141,13 +141,28 @@ namespace Ejercicio1T9
         {
             for(int i = 0; i < numLibros; i++)
             {
-                if(dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString() == titulo)
+                if(dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString().ToLower() == titulo.ToLower())
                 {
                     MessageBox.Show("Titulo duplicado");
                     return true;
                 }
 
             }
+            return false;
+        }
+
+        public bool cambiosEnTexto(int pos,string titulo, string autor, string formato, string idioma, string leido)
+        {
+            if(dsLibros.Tables["Libros"].Rows[pos]["Titulo"].ToString() != titulo ||
+                dsLibros.Tables["Libros"].Rows[pos]["Autor"].ToString() != autor ||
+                dsLibros.Tables["Libros"].Rows[pos]["Formato"].ToString() != formato ||
+                dsLibros.Tables["Libros"].Rows[pos]["Idioma"].ToString() != idioma ||
+                dsLibros.Tables["Libros"].Rows[pos]["Leido"].ToString() != leido
+                    )
+            {
+                return true;
+            }
+
             return false;
         }
 
@@ -159,7 +174,7 @@ namespace Ejercicio1T9
 
                 for(int i = 0; i < numLibros; i++)
                 {
-                    listaLibros += "\n"+i+1+": " + dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString() + " de " 
+                    listaLibros += "\n"+(i+1)+": " + dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString() + " de " 
                         + dsLibros.Tables["Libros"].Rows[i]["Autor"].ToString();
                 }
                 return listaLibros;
@@ -170,20 +185,30 @@ namespace Ejercicio1T9
             }
         }
 
-        public int buscarLibros(int pos)
+        public int buscarLibros(int pos, string objeto)
         {
             int posicionOriginal = pos;
             if(numLibros > 0)
-            {
-                string titulo = Interaction.InputBox("Añadir titulo a buscar");
+            {                
+                string objetoABuscar = Interaction.InputBox("Añadir nombre a buscar");
                 for(int i = 0; i < numLibros; i++)
                 {
-                    if(dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString() == titulo)
+                    if(objeto == "titulo")
                     {
-                        return i;
+                        if(dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString().ToLower() == objetoABuscar.ToLower())
+                        {
+                            return i;
+                        }
+                    }
+                    if(objeto == "autor")
+                    {
+                        if(dsLibros.Tables["Libros"].Rows[i]["Autor"].ToString().ToLower() == objetoABuscar.ToLower())
+                        {
+                            return i;
+                        }
                     }
                 }
-                MessageBox.Show("Titulo no encontrado.");                
+                MessageBox.Show("No encontrado.");                
             }
             else
             {

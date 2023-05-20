@@ -50,7 +50,8 @@
             this.leidoComboBox = new System.Windows.Forms.ComboBox();
             this.formatoComboBox = new System.Windows.Forms.ComboBox();
             this.idiomaComboBox = new System.Windows.Forms.ComboBox();
-            this.BuscarAutorbutton = new System.Windows.Forms.Button();
+            this.buscarAutorbutton = new System.Windows.Forms.Button();
+            this.guardarNuevoButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -177,7 +178,7 @@
             // anadirButton
             // 
             this.anadirButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.anadirButton.Location = new System.Drawing.Point(307, 387);
+            this.anadirButton.Location = new System.Drawing.Point(218, 387);
             this.anadirButton.Name = "anadirButton";
             this.anadirButton.Size = new System.Drawing.Size(158, 40);
             this.anadirButton.TabIndex = 15;
@@ -199,7 +200,7 @@
             // eliminarButton
             // 
             this.eliminarButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.eliminarButton.Location = new System.Drawing.Point(516, 387);
+            this.eliminarButton.Location = new System.Drawing.Point(562, 387);
             this.eliminarButton.Name = "eliminarButton";
             this.eliminarButton.Size = new System.Drawing.Size(158, 40);
             this.eliminarButton.TabIndex = 17;
@@ -221,7 +222,7 @@
             // actualizarButton
             // 
             this.actualizarButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.actualizarButton.Location = new System.Drawing.Point(101, 387);
+            this.actualizarButton.Location = new System.Drawing.Point(39, 387);
             this.actualizarButton.Name = "actualizarButton";
             this.actualizarButton.Size = new System.Drawing.Size(158, 40);
             this.actualizarButton.TabIndex = 20;
@@ -287,22 +288,35 @@
             this.idiomaComboBox.Size = new System.Drawing.Size(177, 32);
             this.idiomaComboBox.TabIndex = 25;
             // 
-            // BuscarAutorbutton
+            // buscarAutorbutton
             // 
-            this.BuscarAutorbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BuscarAutorbutton.Location = new System.Drawing.Point(439, 448);
-            this.BuscarAutorbutton.Name = "BuscarAutorbutton";
-            this.BuscarAutorbutton.Size = new System.Drawing.Size(195, 45);
-            this.BuscarAutorbutton.TabIndex = 26;
-            this.BuscarAutorbutton.Text = "Buscar por autor";
-            this.BuscarAutorbutton.UseVisualStyleBackColor = true;
+            this.buscarAutorbutton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buscarAutorbutton.Location = new System.Drawing.Point(439, 448);
+            this.buscarAutorbutton.Name = "buscarAutorbutton";
+            this.buscarAutorbutton.Size = new System.Drawing.Size(195, 45);
+            this.buscarAutorbutton.TabIndex = 26;
+            this.buscarAutorbutton.Text = "Buscar por autor";
+            this.buscarAutorbutton.UseVisualStyleBackColor = true;
+            this.buscarAutorbutton.Click += new System.EventHandler(this.BuscarAutorbutton_Click);
+            // 
+            // guardarNuevoButton
+            // 
+            this.guardarNuevoButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guardarNuevoButton.Location = new System.Drawing.Point(388, 387);
+            this.guardarNuevoButton.Name = "guardarNuevoButton";
+            this.guardarNuevoButton.Size = new System.Drawing.Size(155, 40);
+            this.guardarNuevoButton.TabIndex = 27;
+            this.guardarNuevoButton.Text = "Guardar";
+            this.guardarNuevoButton.UseVisualStyleBackColor = true;
+            this.guardarNuevoButton.Click += new System.EventHandler(this.guardarNuevoButton_Click);
             // 
             // Libros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(778, 638);
-            this.Controls.Add(this.BuscarAutorbutton);
+            this.Controls.Add(this.guardarNuevoButton);
+            this.Controls.Add(this.buscarAutorbutton);
             this.Controls.Add(this.idiomaComboBox);
             this.Controls.Add(this.formatoComboBox);
             this.Controls.Add(this.leidoComboBox);
@@ -357,7 +371,8 @@
         private System.Windows.Forms.ComboBox leidoComboBox;
         private System.Windows.Forms.ComboBox formatoComboBox;
         private System.Windows.Forms.ComboBox idiomaComboBox;
-        private System.Windows.Forms.Button BuscarAutorbutton;
+        private System.Windows.Forms.Button buscarAutorbutton;
+        private System.Windows.Forms.Button guardarNuevoButton;
     }
 }
 
