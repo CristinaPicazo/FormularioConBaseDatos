@@ -10,6 +10,7 @@ using Ejercicio3T9;
 using System.IO;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
+using System.Net;
 
 namespace Ejercicio1T9
 {
@@ -23,11 +24,11 @@ namespace Ejercicio1T9
             AppDomain.CurrentDomain.SetData("DataDirectory", absolute);
         }
 
-        // Miembros para guardar el dataSet y el dataAdapter de profesores.
+        // Miembros para guardar el dataSet y el dataAdapter.
         private DataSet dsLibros;
         private SqlDataAdapter daLibros;
         
-        // Miembro para guardar el número de profesores.
+        // Miembro para guardar el número total.
         private int numLibros;
        
         // Propiedad de solo lectura.
@@ -41,7 +42,6 @@ namespace Ejercicio1T9
         public SqlDBHelper()
         {
             metodoPath();
-            //string cadenaConexion = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Instituto.mdf;Integrated Security=True;Connect Timeout=30";
             string cadenaConexion = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\AppData\\Libros.mdf;Integrated Security=True;Connect Timeout=30";
             SqlConnection con = new SqlConnection(cadenaConexion);
             
@@ -52,7 +52,7 @@ namespace Ejercicio1T9
             dsLibros = new DataSet();
             daLibros.Fill(dsLibros, "Libros");
             
-            // Obtenemos el número de profesores
+            // Obtenemos el número de Libros
             numLibros = dsLibros.Tables["Libros"].Rows.Count;
             
             // Cerramos la conexión.
@@ -60,7 +60,7 @@ namespace Ejercicio1T9
         }
 
         // Método que a partir de una posición en la BD
-        // Devuelve un objeto profesor.
+        // Devuelve un objeto lilbro.
         // Devuelve null si pos está fuera de los límites
         public Libro devuelveLibro(int pos)
         {
@@ -69,11 +69,12 @@ namespace Ejercicio1T9
             {
                 // Objeto que nos permite recoger un registro de la tabla.
                 DataRow dRegistro;
-                // Cogemos el registro de la posición pos en la tabla Profesores
+                // Cogemos el registro de la posición pos en la tabla
                 dRegistro = dsLibros.Tables["Libros"].Rows[pos];
                 // Cogemos el valor de cada una de las columnas del registro
-                // y lo creamos el objeto profesor con esos datos.
-                libro = new Libro(
+                // y lo creamos el objeto con esos datos.
+                libro = new Libro(                    
+                    dRegistro["Id"].ToString(), 
                     dRegistro["Titulo"].ToString(), 
                     dRegistro["Autor"].ToString(),
                     dRegistro["Formato"].ToString(), 
@@ -85,12 +86,13 @@ namespace Ejercicio1T9
         }
         
         // Metodos CRUD
-        // Método que añade un profesor a nuestra BD
+        // Método que añade un libro a nuestra BD
         public void anadirLibro(Libro libro)
-        {
+        {            
             // Creamos un nuevo registro.
             DataRow dRegistro = dsLibros.Tables["Libros"].NewRow();
             // Metemos los datos en el nuevo registro
+            dRegistro["Id"] = libro.Id;
             dRegistro["Titulo"] = libro.Titulo;
             dRegistro["Autor"] = libro.Autor;
             dRegistro["Formato"] = libro.Formato;
@@ -104,32 +106,33 @@ namespace Ejercicio1T9
             SqlCommandBuilder cb = new SqlCommandBuilder(daLibros);
             daLibros.Update(dsLibros, "Libros");
 
-            // Actualizamos el número de profesores
+            // Actualizamos el número
             numLibros++;
 
         }
 
         public void actualizarLibro(Libro libro, int pos)
-        {
-            // Cogemos el registro situado en la posición actual.
-            DataRow dRegistro = dsLibros.Tables["Libros"].Rows[pos];
-            // Metemos los datos en el registro
-            dRegistro["Titulo"] = libro.Titulo;
-            dRegistro["Autor"] = libro.Autor;
-            dRegistro["Formato"] = libro.Formato;
-            dRegistro["Idioma"] = libro.Idioma;
-            dRegistro["Leido"] = libro.Leido;
+        {            
+                // Cogemos el registro situado en la posición actual.
+                DataRow dRegistro = dsLibros.Tables["Libros"].Rows[pos];
+                // Metemos los datos en el registro
+                dRegistro["Id"] = libro.Id;
+                dRegistro["Titulo"] = libro.Titulo;
+                dRegistro["Autor"] = libro.Autor;
+                dRegistro["Formato"] = libro.Formato;
+                dRegistro["Idioma"] = libro.Idioma;
+                dRegistro["Leido"] = libro.Leido;
 
-            // Reconectamos con el dataAdapter y actualizamos la BD
-            SqlCommandBuilder cb = new SqlCommandBuilder(daLibros);
-            daLibros.Update(dsLibros, "Libros");
+                // Reconectamos con el dataAdapter y actualizamos la BD
+                SqlCommandBuilder cb = new SqlCommandBuilder(daLibros);
+                daLibros.Update(dsLibros, "Libros");
         }
-        public void eliminarProfesor(int pos)
+        public void eliminarLibro(int pos)
         {
             // Eliminamos el registro situado en la posición actual.
             dsLibros.Tables["Libros"].Rows[pos].Delete();
             
-            // Tenemos un profesor menos
+            // Tenemos uno menos
             numLibros--;
             
             // Reconectamos con el dataAdapter y actualizamos la BD
@@ -137,18 +140,24 @@ namespace Ejercicio1T9
             daLibros.Update(dsLibros, "Libros");
         }
 
-        public bool estaTituloDuplicado(string titulo)
+        public bool estaDuplicado(string titulo, string id)
         {
+            bool duplicado = false;
             for(int i = 0; i < numLibros; i++)
             {
                 if(dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString().ToLower() == titulo.ToLower())
                 {
                     MessageBox.Show("Titulo duplicado");
-                    return true;
+                    duplicado = true;
+                }
+                if(dsLibros.Tables["Libros"].Rows[i]["Id"].ToString().ToLower() == id.ToLower())
+                {
+                    MessageBox.Show("Id duplicado");
+                    duplicado = true;
                 }
 
             }
-            return false;
+            return duplicado;
         }
 
         public bool cambiosEnTexto(int pos,string titulo, string autor, string formato, string idioma, string leido)
@@ -164,26 +173,98 @@ namespace Ejercicio1T9
             }
 
             return false;
-        }
-
+        }        
+        
         public string listaLibros()
         {
-            string listaLibros = "Libros:";
+            string listaLibros = "Libros:\n";
             if(numLibros > 0)
             {
-
                 for(int i = 0; i < numLibros; i++)
                 {
-                    listaLibros += "\n"+(i+1)+": " + dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString() + " de " 
-                        + dsLibros.Tables["Libros"].Rows[i]["Autor"].ToString();
+
+                    listaLibros += "\n" + ( i + 1 ) + ": " + dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString() + " de "
+                                                   + dsLibros.Tables["Libros"].Rows[i]["Autor"].ToString();
                 }
                 return listaLibros;
             }
             else
             {
-                return listaLibros="No tiene libros.";
+                return listaLibros = "No tiene libros.";
             }
         }
+        public string listaLibrosIdioma(string idioma)
+        {
+            string listaLibros = "Libros en " + idioma + ":\n";
+            int total = 0;
+            if(numLibros > 0)
+            {
+                for(int i = 0; i < numLibros; i++)
+                {
+                    if(dsLibros.Tables["Libros"].Rows[i]["Idioma"].ToString() == idioma)
+                    {
+                        listaLibros += "\n" + ( i + 1 ) + " - " + dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString() + " de "
+                                                   + dsLibros.Tables["Libros"].Rows[i]["Autor"].ToString();
+                        total++;
+                    }
+
+
+                }
+                return listaLibros += "\n\nTotal de libros encontrados: " + total;
+            }
+        else
+        {
+            return listaLibros = "No tiene libros.";
+        }
+    }
+        public string listaLibrosLeido(string leido)
+        {
+            string listaLibros = "Libros " + leido + " leídos:\n";
+            int total = 0;
+
+            if(numLibros > 0)
+            {
+                for(int i = 0; i < numLibros; i++)
+                {
+                    if(dsLibros.Tables["Libros"].Rows[i]["Leido"].ToString() == leido)
+                    {
+                        listaLibros += "\n" + ( i + 1 ) + " - " + dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString() + " de "
+                                                   + dsLibros.Tables["Libros"].Rows[i]["Autor"].ToString();
+                        total++;
+
+                    }
+                }
+                return listaLibros += "\n\nTotal de libros encontrados: " + total; ;
+            }
+        else
+        {
+            return listaLibros = "No tiene libros.";
+        }
+    }
+        public string listaLibrosFormato(string formato)
+        {
+            string listaLibros = "Libros en " + formato + ":\n";
+            int total = 0;
+
+            if(numLibros > 0)
+            {
+                for(int i = 0; i < numLibros; i++)
+                {                     
+                        if(dsLibros.Tables["Libros"].Rows[i]["Formato"].ToString() == formato)
+                        {
+                            listaLibros += "\n" + ( i + 1 ) + " - " + dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString() + " de "
+                                                       + dsLibros.Tables["Libros"].Rows[i]["Autor"].ToString();
+                        total++;
+
+                    }
+                }
+                return listaLibros += "\n\nTotal de libros encontrados: " + total; ;
+            }
+        else
+        {
+            return listaLibros = "No tiene libros.";
+        }
+    }
 
         public int buscarLibros(int pos, string objeto)
         {
@@ -191,30 +272,74 @@ namespace Ejercicio1T9
             if(numLibros > 0)
             {                
                 string objetoABuscar = Interaction.InputBox("Añadir nombre a buscar");
-                for(int i = 0; i < numLibros; i++)
-                {
-                    if(objeto == "titulo")
+                if(objetoABuscar!= ""){
+
+                    for(int i = 0; i < numLibros; i++)
                     {
-                        if(dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString().ToLower() == objetoABuscar.ToLower())
+                        if(objeto == "titulo")
                         {
-                            return i;
+                            if(dsLibros.Tables["Libros"].Rows[i]["Titulo"].ToString().ToLower() == objetoABuscar.ToLower())
+                            {
+                                return i;
+                            }
+                        }
+                        if(objeto == "autor")
+                        {
+                            if(dsLibros.Tables["Libros"].Rows[i]["Autor"].ToString().ToLower() == objetoABuscar.ToLower())
+                            {
+                                return i;
+                            }
                         }
                     }
-                    if(objeto == "autor")
-                    {
-                        if(dsLibros.Tables["Libros"].Rows[i]["Autor"].ToString().ToLower() == objetoABuscar.ToLower())
-                        {
-                            return i;
-                        }
-                    }
+                    MessageBox.Show("No encontrado.");
+                    sugerenciaBusqueda(objeto,objetoABuscar);
                 }
-                MessageBox.Show("No encontrado.");                
+                else
+                {
+                    MessageBox.Show("No has escrito nada.");
+                }
             }
             else
             {
                 MessageBox.Show("La lista esta vacía");
             }
             return posicionOriginal;
+        }
+
+        public void sugerenciaBusqueda(string objeto, string objetoABuscar)
+        {
+            string texto = "Posibles libros:\n";
+            List<Libro> lista = new List<Libro>();
+
+            DataRow[] registroParecido;
+            if(objeto == "titulo")
+            {
+                registroParecido = dsLibros.Tables["Libros"].Select("Titulo Like '%" + objetoABuscar + "%'");
+
+                for(int i = 0; i < registroParecido.Length; i++)
+                {
+                    DataRow registro;
+                    registro = registroParecido[i];
+
+                    texto += "\n" + registro["Titulo"].ToString() + " de " + registro["Autor"].ToString();
+
+                }
+            }
+            if(objeto == "autor")
+            {
+                registroParecido = dsLibros.Tables["Libros"].Select("Autor Like '%" + objetoABuscar + "%'");
+
+                for(int i = 0; i < registroParecido.Length; i++)
+                {
+                    DataRow registro;
+                    registro = registroParecido[i];
+
+                    texto += "\n" + registro["Titulo"].ToString() + " " + registro["Autor"].ToString();
+
+                }
+            }
+
+                MessageBox.Show(texto);
         }
     }
 }

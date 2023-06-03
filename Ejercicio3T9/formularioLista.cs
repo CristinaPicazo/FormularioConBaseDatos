@@ -15,25 +15,56 @@ namespace Ejercicio1T9
         public formularioLista()
         {
             InitializeComponent();
+        }
+
+        private void formularioLista_Load(object sender, EventArgs e)
+        {
             // Creamos el objeto BD
             sqlDBHelper = new SqlDBHelper();
-
-            ordenarComboBox.Text = string.Empty;
-            idiomacomboBox.Text = string.Empty;
-            leidoComboBox.Text = string.Empty;
-            formatoComboBox.Text = string.Empty;
 
             Resultadolabel.Text = sqlDBHelper.listaLibros();
         }
 
         // Instancia del objeto que maneja la BD.
-        SqlDBHelper sqlDBHelper;
-   
+        SqlDBHelper sqlDBHelper;        
 
-            private void Resultadolabel_Click(object sender, EventArgs e)
+        private void todosButton_Click(object sender, EventArgs e)
         {
+            Resultadolabel.Text = sqlDBHelper.listaLibros();
+        }
 
+        private void castellanoButton_Click(object sender, EventArgs e)
+        {
+            Resultadolabel.Text = sqlDBHelper.listaLibrosIdioma("Castellano");
 
+        }
+
+        private void inglesButton_Click(object sender, EventArgs e)
+        {
+            Resultadolabel.Text = sqlDBHelper.listaLibrosIdioma("Inglés");
+        }
+
+        private void siButton_Click(object sender, EventArgs e)
+        {
+            Resultadolabel.Text = sqlDBHelper.listaLibrosLeido("Sí");
+
+        }
+
+        private void noButton_Click(object sender, EventArgs e)
+        {
+            Resultadolabel.Text = sqlDBHelper.listaLibrosLeido("No");
+
+        }
+
+        private void fisicoButton_Click(object sender, EventArgs e)
+        {
+            Resultadolabel.Text = sqlDBHelper.listaLibrosFormato("Físico");
+
+        }
+
+        private void digitalButton_Click(object sender, EventArgs e)
+        {
+            Resultadolabel.Text = sqlDBHelper.listaLibrosFormato("Digital");
         }
     }
 }

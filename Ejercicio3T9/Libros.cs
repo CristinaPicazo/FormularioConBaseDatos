@@ -35,19 +35,36 @@ namespace Ejercicio3T9
             // y mostramos el registro
             pos = 0;
             mostrarRegistro(pos);
+
+            // Bloquea los combos para que no se pueda escribir nada más
+            formatoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            idiomaComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            leidoComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
         // Subprograma que muestra el registro situado en la posición pos
         private void mostrarRegistro(int pos)
         {
-            Libro libro;
-            libro = sqlDBHelper.devuelveLibro(pos);
-            // Ponemos los valores en los textBox correspondientes
-            tituloTextBox.Text = libro.Titulo;
-            autorTextBox.Text = libro.Autor;
-            formatoComboBox.Text = libro.Formato;
-            idiomaComboBox.Text = libro.Idioma;
-            leidoComboBox.Text = libro.Leido;   
-
+            if(sqlDBHelper.NumLibros > 0)
+            {
+                Libro libro;
+                libro = sqlDBHelper.devuelveLibro(pos);
+                // Ponemos los valores en los textBox correspondientes
+                idTextBox.Text = libro.Id;
+                tituloTextBox.Text = libro.Titulo;
+                autorTextBox.Text = libro.Autor;
+                formatoComboBox.Text = libro.Formato;
+                idiomaComboBox.Text = libro.Idioma;
+                leidoComboBox.Text = libro.Leido;
+            }
+            else
+            {
+                idTextBox.Clear();
+                tituloTextBox.Clear();
+                autorTextBox.Clear();
+                formatoComboBox.Text = "Físico";
+                idiomaComboBox.Text = "Castellano";
+                leidoComboBox.Text = "No";
+            }
             // Inhabilita siguiente, primero, anterior y ultimo si solo tiene un registro o ninguno
             habilitarDesabilitarBotones();
             verNumeroRegistros();
@@ -66,7 +83,6 @@ namespace Ejercicio3T9
 
         private void habilitarDesabilitarBotones()
         {
-            // TODO: sacar habilitar los botones
             // Activa el botón
             primeroButton.Enabled = true;
             ultimoButton.Enabled = true;
@@ -74,8 +90,9 @@ namespace Ejercicio3T9
             siguienteButton.Enabled = true;
             eliminarButton.Enabled = true;
             actualizarButton.Enabled = true;
-            guardarButton.Enabled = false;
-
+            guardarbutton.Enabled= false;
+            buscarAutorbutton.Enabled = true;
+            buscarTituloButton.Enabled = true;
 
             if(sqlDBHelper.NumLibros <= 1)
             {
@@ -87,10 +104,17 @@ namespace Ejercicio3T9
 
                 if(sqlDBHelper.NumLibros == 0)
                 {
+                    // Dejamos añadir el identificador
+                    idTextBox.Enabled = true;
+
                     anadirButton.Enabled = true;
-                    guardarButton.Enabled = true;
+                    guardarbutton.Enabled = true;
+                    //guardarNuevoButton.Enabled = true;
                     eliminarButton.Enabled = false;
                     actualizarButton.Enabled = false;
+
+                    buscarAutorbutton.Enabled = false;
+                    buscarTituloButton.Enabled = false;
                 }
             }
             else if(pos == 0)
@@ -106,7 +130,7 @@ namespace Ejercicio3T9
                 siguienteButton.Enabled = false;
             }
         }
-        private void bPrimero_Click(object sender, EventArgs e)
+        private void primeroButton_Click(object sender, EventArgs e)
         {
             // Comprobamos cambios en el texto
             if(sqlDBHelper.cambiosEnTexto(pos, tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text, idiomaComboBox.Text, leidoComboBox.Text))
@@ -117,10 +141,10 @@ namespace Ejercicio3T9
             pos = 0;
             mostrarRegistro(pos);
         }
-        private void bAnterior_Click(object sender, EventArgs e)
+        private void anteriorButton_Click(object sender, EventArgs e)
         {
             // Comprobamos cambios en el texto
-            if(sqlDBHelper.cambiosEnTexto(pos,tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text,idiomaComboBox.Text, leidoComboBox.Text))
+            if(sqlDBHelper.cambiosEnTexto(pos, tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text,idiomaComboBox.Text, leidoComboBox.Text))
             {
                 actualizarButton_Click(sender, e);
             }
@@ -128,7 +152,7 @@ namespace Ejercicio3T9
             pos--;
             mostrarRegistro(pos);
         }
-        private void bSiguiente_Click(object sender, EventArgs e)
+        private void siguienteButton_Click(object sender, EventArgs e)
         {
             // Comprobamos cambios en el texto
             if(sqlDBHelper.cambiosEnTexto(pos, tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text, idiomaComboBox.Text, leidoComboBox.Text))
@@ -139,7 +163,7 @@ namespace Ejercicio3T9
             pos++;
             mostrarRegistro(pos);
         }
-        private void bUltimo_Click(object sender, EventArgs e)
+        private void ultimoButton_Click(object sender, EventArgs e)
         {
             // Comprobamos cambios en el texto
             if(sqlDBHelper.cambiosEnTexto(pos, tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text, idiomaComboBox.Text, leidoComboBox.Text))
@@ -159,14 +183,21 @@ namespace Ejercicio3T9
 
                 // Volvemos a cambiarlo a añadir
                 anadirButton.Text = "Añadir";
+
             }
             else
-            {
+            {                
+                idTextBox.Enabled = true;
+
+                idTextBox.Clear();
                 tituloTextBox.Clear();
-                autorTextBox.Clear();                
-               
+                autorTextBox.Clear();
+                formatoComboBox.Text = "";
+                idiomaComboBox.Text = "";
+                leidoComboBox.Text = "";
+
                 // Habilitar el botón guardar
-                guardarButton.Enabled = true;
+                guardarbutton.Enabled = true;
 
                 // Impedir que pueda hacer nada excepto guardar o cancelar
                 primeroButton.Enabled = false;
@@ -178,47 +209,54 @@ namespace Ejercicio3T9
 
                 // Cambiar nombre del botón de añadir a cancelar
                 anadirButton.Text = "Cancelar";
+
+                buscarAutorbutton.Enabled = false;
+                buscarTituloButton.Enabled = false;
             }
             
 
         }
-        private void guardarButton_Click(object sender, EventArgs e)
-        {
-            //if(tituloTextBox.Text != "" && autorTextBox.Text != "" && formatoComboBox.Text != "" && idiomaComboBox.Text != "" && leidoComboBox.Text != "")
-            //{
-            //    if(!sqlDBHelper.estaTituloDuplicado(tituloTextBox.Text))
-            //    {
-            //        // Creamos el profesor con los datos del formulario
-            //        Libro libro = new Libro(tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text, idiomaComboBox.Text, leidoComboBox.Text);
-            //        sqlDBHelper.anadirLibro(libro);
-            //        // Actualizamos la posición
-            //        pos = sqlDBHelper.NumLibros - 1;
+        //private void guardarButton_Click(object sender, EventArgs e)
+        //{
+        //    //if(tituloTextBox.Text != "" && autorTextBox.Text != "" && formatoComboBox.Text != "" && idiomaComboBox.Text != "" && leidoComboBox.Text != "")
+        //    //{
+        //    //    if(!sqlDBHelper.estaTituloDuplicado(tituloTextBox.Text))
+        //    //    {
+        //    //        // Creamos el profesor con los datos del formulario
+        //    //        Libro libro = new Libro(tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text, idiomaComboBox.Text, leidoComboBox.Text);
+        //    //        sqlDBHelper.anadirLibro(libro);
+        //    //        // Actualizamos la posición
+        //    //        pos = sqlDBHelper.NumLibros - 1;
 
-            //        // Volvemos a cambiarlo a añadir
-            //        anadirButton.Text = "Añadir";
+        //    //        // Volvemos a cambiarlo a añadir
+        //    //        anadirButton.Text = "Añadir";
 
-            //        mostrarRegistro(pos);
-            //    }
-            //}
+        //    //        mostrarRegistro(pos);
+        //    //    }
+        //    //}
 
-        }
-        
+        //}
+
         private void actualizarButton_Click(object sender, EventArgs e)
         {
-            // Comprobamos cambios en el texto
-            if(sqlDBHelper.cambiosEnTexto(pos, tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text, idiomaComboBox.Text, leidoComboBox.Text))
-            {
-                DialogResult dialogResult = MessageBox.Show("¿Quiere actualizar el registro?", "Cambio", MessageBoxButtons.YesNo);
-                if(dialogResult == DialogResult.Yes)
+            if(tituloTextBox.Text != "" && autorTextBox.Text != "" && formatoComboBox.Text != "" && idiomaComboBox.Text != "" && leidoComboBox.Text != "")
+            { 
+                // Comprobamos cambios en el texto
+                if(sqlDBHelper.cambiosEnTexto(pos, tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text, idiomaComboBox.Text, leidoComboBox.Text))
                 {
-                    // Creamos el profesor con los datos del formulario
-                    Libro libro = new Libro(tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text, idiomaComboBox.Text, leidoComboBox.Text);
-                    sqlDBHelper.actualizarLibro(libro, pos);
+                    DialogResult dialogResult = MessageBox.Show("¿Quiere actualizar el registro?", "Cambio", MessageBoxButtons.YesNo);
+                    if(dialogResult == DialogResult.Yes)
+                    {                        
+                        // Creamos el libro con los datos del formulario
+                        Libro libro = new Libro(idTextBox.Text, tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text, idiomaComboBox.Text, leidoComboBox.Text);
+                        sqlDBHelper.actualizarLibro(libro, pos);
+                        mostrarRegistro(pos);
+                    }
                 }
-            }
-            else
-            {
-                MessageBox.Show("No ha cambiado nada en el registro");
+                else
+                {
+                    MessageBox.Show("No ha cambiado nada en el registro");
+                }
             }
 
         }
@@ -228,54 +266,46 @@ namespace Ejercicio3T9
             DialogResult dialogResult = MessageBox.Show("¿Estas seguro que quiere eliminar el registro actual?", "Eliminar", MessageBoxButtons.YesNo);
             if(dialogResult == DialogResult.Yes)
             {
-                sqlDBHelper.eliminarProfesor(pos);
-                // Nos vamos al primer registro y lo mostramos
-                pos = 0;
+                sqlDBHelper.eliminarLibro(pos);
+                if(pos > 0)
+                {
+                    pos = pos - 1;
+                }
+                else
+                {
+                    pos = 0;
+                }
                 mostrarRegistro(pos);
             }
         }
 
-        private void listaProfesoresButton_Click(object sender, EventArgs e)
+        private void listaGeneralButton_Click(object sender, EventArgs e)
         {
 
             formularioLista formularioLista = new formularioLista();
             formularioLista.ShowDialog();
         }
 
-        private void buscarApellidoButton_Click(object sender, EventArgs e)
+        private void buscarTituloButton_Click(object sender, EventArgs e)
         {
             pos = sqlDBHelper.buscarLibros(pos, "titulo");
-            //pos = posicionEncontrada;
             mostrarRegistro(pos);
         }
 
-        private void registroLabel_Click(object sender, EventArgs e)
+        private void buscarAutorButton_Click(object sender, EventArgs e)
         {
-
+            pos = sqlDBHelper.buscarLibros(pos, "autor");
+            mostrarRegistro(pos);
         }
 
-        private void listaIdiomabutton_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void listaFormatobutton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void listaLeidobutton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guardarNuevoButton_Click(object sender, EventArgs e)
+        private void guardarbutton_Click_1(object sender, EventArgs e)
         {
             if(tituloTextBox.Text != "" && autorTextBox.Text != "" && formatoComboBox.Text != "" && idiomaComboBox.Text != "" && leidoComboBox.Text != "")
             {
-                if(!sqlDBHelper.estaTituloDuplicado(tituloTextBox.Text))
+                if(!sqlDBHelper.estaDuplicado(tituloTextBox.Text, idTextBox.Text))
                 {
-                    // Creamos el profesor con los datos del formulario
-                    Libro libro = new Libro(tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text, idiomaComboBox.Text, leidoComboBox.Text);
+                    // Creamos el libro con los datos del formulario
+                    Libro libro = new Libro(idTextBox.Text, tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text, idiomaComboBox.Text, leidoComboBox.Text);
                     sqlDBHelper.anadirLibro(libro);
                     // Actualizamos la posición
                     pos = sqlDBHelper.NumLibros - 1;
@@ -286,14 +316,48 @@ namespace Ejercicio3T9
                     mostrarRegistro(pos);
                 }
             }
-    }
-
-        private void BuscarAutorbutton_Click(object sender, EventArgs e)
-        {
-            pos = sqlDBHelper.buscarLibros(pos, "autor");
-            //pos = posicionEncontrada;
-            mostrarRegistro(pos);
         }
+
+        //private void registroLabel_Click(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //private void listaIdiomabutton_Click(object sender, EventArgs e)
+        //{
+        //}
+
+        //private void listaFormatobutton_Click(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //private void listaLeidobutton_Click(object sender, EventArgs e)
+        //{
+
+        //}
+
+        //    private void guardarNuevoButton_Click(object sender, EventArgs e)
+        //    {
+        //        if(tituloTextBox.Text != "" && autorTextBox.Text != "" && formatoComboBox.Text != "" && idiomaComboBox.Text != "" && leidoComboBox.Text != "")
+        //        {
+        //            if(!sqlDBHelper.estaTituloDuplicado(tituloTextBox.Text))
+        //            {
+        //                // Creamos el profesor con los datos del formulario
+        //                Libro libro = new Libro(tituloTextBox.Text, autorTextBox.Text, formatoComboBox.Text, idiomaComboBox.Text, leidoComboBox.Text);
+        //                sqlDBHelper.anadirLibro(libro);
+        //                // Actualizamos la posición
+        //                pos = sqlDBHelper.NumLibros - 1;
+
+        //                // Volvemos a cambiarlo a añadir
+        //                anadirButton.Text = "Añadir";
+
+        //                mostrarRegistro(pos);
+        //            }
+        //        }
+        //}
+
+
     }
     
 }
